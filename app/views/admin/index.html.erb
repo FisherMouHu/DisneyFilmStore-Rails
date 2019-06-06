@@ -1,0 +1,8 @@
+<% if notice %>
+    <p id="notice"><%= notice %></p>
+<% end %>
+
+<h1>Welcome Back !</h1>
+
+<p>Now, it is <%= Time.now %></p>
+<p>There are still <%= pluralize(@total_orders, "Order") %> Waiting to be Completed !</p>

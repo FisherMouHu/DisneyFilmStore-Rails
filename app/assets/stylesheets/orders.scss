@@ -1,0 +1,58 @@
+// Place all the styles related to the Orders controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.order_form {
+    fieldset {
+        background: #efe;
+  
+        legend {
+            color: #aaa;
+            font-weight: bold;
+            font-size: larger;
+
+            form { 
+                label {
+                    background: #141;
+                    font-family: sans-serif;
+                    padding: 0.2em 1em;
+                }
+            }
+
+            text-align: left;
+            display: block;
+        }
+
+        width: 60em;
+
+        select, textarea, input {
+            margin-top: 0.5em;
+            margin-left: 0.5em;
+        }
+
+        select {
+            min-height: 25px;
+        }
+  
+        .actions {
+            margin-right: 2em;
+        }
+
+        .actions, a {
+            display: inline;
+        }
+
+        #login {
+            margin-top: 0.5em;
+        }
+
+        p {
+            font-size: smaller;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+  
+        br {
+            display: none
+        }
+    }
+}

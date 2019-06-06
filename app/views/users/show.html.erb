@@ -1,0 +1,16 @@
+<% if notice %>
+    <p id="notice"><%= notice %></p>
+<% end %>
+
+<p>
+  <strong>Username:</strong>
+  <%= @user.username %>
+</p>
+
+<p>
+  <strong>Password:</strong>
+  ( Private )
+</p>
+
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %>

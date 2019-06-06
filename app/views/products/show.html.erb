@@ -1,0 +1,26 @@
+<% if notice %>
+    <p id="notice"><%= notice %></p>
+<% end %>
+
+<h1>Product Details</h1>
+
+<table>
+  <tbody>
+    <tr>
+      <td class="list_image"><%= image_tag(@product.image) %></td>
+      <td class="list_description">
+        <strong>Name:</strong>
+        <%= @product.name %>
+        <br><br><br>
+        <strong>Description:</strong>
+        <%= @product.description %>
+        <br><br><br>
+        <strong>Price:</strong>
+        $<%= @product.price %>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<%= link_to 'Edit', edit_product_path(@product) %> |
+<%= link_to 'Back', products_path %>

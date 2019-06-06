@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Online Store</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body class="<%= controller.controller_name %>">
+    <div id="banner">
+      <%= image_tag("Disney.png") %>
+      <p>Disney's Live-Action Animated Film Store</p>
+    </div>
+    <div id="columns">
+      <div id="side">
+        <% if controller.controller_name == "shopper" %>
+          <h3>Search Product</h3>
+          <div id="search_bar">
+            <%= form_tag(shopper_path, method: :get) do %> 
+              <%= text_field_tag(:search, params[:search]) %>
+              <%= submit_tag("Search") %>
+            <% end %>
+          </div>
+        <% end %>
+        <% if controller.controller_name == "shopper" %>
+          <div id="cart">
+            <%= render(@cart) %>
+          </div>
+        <% end %>
+        <h3>Website Links</h3>
+        <ul>
+          <li><%= link_to 'Home', shopper_path %></li>
+          <li><%= link_to 'Product', products_path %></li>
+          <li><%= link_to 'Order', orders_path %></li>
+          <li><%= link_to 'User', users_path %></li>
+          <li><%= link_to 'Login', access_new_path %></li>
+        </ul>
+        <% if session[:user_id] %>
+          <%= button_to 'Logout', logout_path, id: 'logout', method: :delete %>
+        <% end %>
+      </div>
+      <div id="main">
+        <%= yield %>
+      </div>
+    </div>
+  </body>
+</html>

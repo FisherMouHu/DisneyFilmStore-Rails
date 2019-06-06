@@ -1,0 +1,44 @@
+<%= form_for(@order) do |form| %>
+  <% if @order.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@order.errors.count, "error") %> prohibited this order from being saved:</h2>
+
+      <ul>
+      <% @order.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, size: 23 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :address %>
+    <%= form.text_area :address, rows: 3, cols: 21 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :email %>
+    <%= form.text_field :email, size: 23, placeholder: "?@?.com" %>
+  </div>
+
+  <div class="field">
+    <%= form.label 'Phone Number' %>
+    <%= form.text_field :phonenumber, size: 23, placeholder: "?-?-?" %>
+  </div>
+
+  <div class="field">
+    <%= form.label 'Payment Method' %>
+    <%= form.select :paytype, Order::PAYMENT_TYPES, prompt: "Select a Payment Method" %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit 'Place Order' %>
+  </div>
+
+  <%= link_to 'Back', shopper_url %>
+<% end %>

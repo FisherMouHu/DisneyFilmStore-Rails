@@ -1,0 +1,23 @@
+<div id="block">
+    <% if notice %>
+        <p id="notice"><%= notice %></p>
+    <% end %>
+</div>
+
+<h1>Products Catalog</h1>
+
+<% if @products.length != 0 %>
+    <% @products.each do |product| %>
+        <div class="entry">
+            <%= image_tag(product.image) %>
+            <h3><%= product.name %></h3>
+            <p><%= product.description %></p>
+            <div class="price_line">
+                <span class="price">$<%= product.price %></span>
+            </div>
+            <%= button_to "Add to Cart", lineitems_path(product_id: product), class: "add_to_cart", remote: true %>
+        </div>
+    <% end %>
+<% else %>
+    <p id="oops">- Sorry, There is No Similar Products in Our Store Currently ! -</p>
+<% end %>

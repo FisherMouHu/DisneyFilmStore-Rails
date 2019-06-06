@@ -1,0 +1,18 @@
+<h3>Shopping Cart</h3>
+
+<table>
+    <% @cart.lineitems.each do |item| %>
+        <tr>
+            <td><%= item.quantity %> ×</td>
+            <td colspan="2" id="name"><%= item.product.name %></td>
+            <td>$<%= item.product.price %></td>
+        </tr>
+    <% end %>
+    <tr>
+        <td colspan="3">Total</td>
+        <td><%= number_to_currency(@cart.total_price) %></td>
+    </tr>
+</table>
+
+<%= button_to "Empty Cart", @cart, method: :delete, data: {confirm: "Are you sure?"} %>
+<%= button_to "Check Out", new_order_path, id: "check", method: :get %>

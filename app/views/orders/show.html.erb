@@ -1,0 +1,42 @@
+<% if notice %>
+    <p id="notice"><%= notice %></p>
+<% end %>
+
+<h1>Order Details</h1>
+
+<p>
+  <strong>Name:</strong>
+  <%= @order.name %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @order.address %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @order.email %>
+</p>
+
+<p>
+  <strong>Phone Number:</strong>
+  <%= @order.phonenumber %>
+</p>
+
+<p>
+  <strong>Payment Method:</strong>
+  <%= @order.paytype %>
+</p>
+
+<p>
+  <strong>Shopping Details:</strong>
+</p>
+
+<% @order.lineitems.each do |item|%>
+  <ul>
+    <li><%= item.quantity %> × <%= item.product.name %></li>
+  </ul>
+<% end%>
+
+<%= link_to 'Back', orders_path %>
