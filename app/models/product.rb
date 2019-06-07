@@ -19,7 +19,7 @@ class Product < ApplicationRecord
 
     def self.search(name)
         if name
-            return Product.where('name LIKE ?', "%#{name}%").order(:name)
+            return Product.where('name ILIKE ?', "%#{name}%").order(:name)
         else
             return Product.order(:name)
         end
