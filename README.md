@@ -1,24 +1,13 @@
-# README
+# Disney Live-Action Animated Film Store - Rails
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a Disney Live-Action Animated Film Store developed by **Ruby** and **Ruby on Rails**.
 
-Things you may want to cover:
+By using this Web Application, you can not only ***Search*** and ***Add*** your beloved **Products** in the **Shopping Cart** and ***Place*** the **Order**!
 
-* Ruby version
+For **Admin User**, you can ***Edit*** the **Product** Information, ***Manage*** the **Admin User**, and ***Manage*** the **Order**!
 
-* System dependencies
+Developed by *Fisher MouHu*
 
-* Configuration
+Feel Free to Use it !
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+For more Guideline, please go to the ***Guideline.md*** !
