@@ -1547,3 +1547,69 @@
         # Suppress logger output for asset requests.
         config.assets.quiet = false
         ```
+        
+- ### ( Optional ) Deploy Application on Heroku
+    - Create Heroku Application
+    
+        ```
+        heroku create ...
+        ```
+        
+    - Change gem 'sqlite3' in Gemfile
+    
+        ``` ruby
+        group :development, :test do
+          gem 'sqlite3'
+        end
+
+        group :production do
+          gem 'pg', '~> 0.18'
+        end
+        ```
+        
+    - Apply the Gemfile Changes
+    
+        ```
+        bundler install --without production
+        ```
+        
+    - Change production.rb in config/environment
+    
+        ``` ruby
+        config.serve_static_assets = true
+        config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect'
+        config.assets.compile = true
+        ```
+        
+    - Commit the Change
+    
+        ```
+        git add .
+        
+        git commit -m "..."
+        
+        git push heroku master
+        ```
+        
+    - Run Migration and Add Data
+    
+        ```
+        heroku run rails db:migrate
+        
+        heroku run rails db:seed
+        ```
+
+- ### ( Optional & Dangerous ) Ignore the Upper-Case in PostgresSQL
+
+    - Change products.rb in Model ( However, it won't work in SQLite !!! )
+    
+        ``` ruby
+        def self.search(name)
+            if name
+                return Product.where('name ILIKE ?', "%#{name}%").order(:name)
+            else
+                return Product.order(:name)
+            end
+        end
+        ```
+        
