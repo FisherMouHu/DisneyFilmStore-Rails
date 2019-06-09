@@ -65,7 +65,7 @@
 
 - ### Add Other Film Informations
 
-- ### Use seed.rb Add Products
+- ### Use seeds.rb Add Products
 
     ``` ruby
     Product.create(
@@ -80,7 +80,7 @@
     rails db:seed
     ```
 
-- ### Create Product Index View
+- ### Create Product Index View ( product / index.html.erb )
 
     ``` html
     <% if notice %>
@@ -120,7 +120,7 @@
     <%= link_to 'New Product', new_product_path %>
     ```
 
-- ### Add Class to Layout View
+- ### Add Class to Layout View ( layout / application.html.erb )
 
     ``` html
     <body class="products">
@@ -144,7 +144,7 @@
         rails g controller Shopper index
         ```
 
-    - Create Index Views
+    - Create Shopper Index Views
 
         ``` html
         <<div id="block">
@@ -167,7 +167,7 @@
         <% end %>
         ```
 
-    - Change Controller 
+    - Change Shopper Controller ( shopper_controller.rb )
 
         ``` ruby
         def index
@@ -175,7 +175,7 @@
         end
         ```
 
-    - Change Layout View
+    - Change Layout View ( layout / application.html.erb )
 
         ``` html
         <body class="<%= controller.controller_name %>">
@@ -215,20 +215,20 @@
     rails db:migrate
     ```
 
-- ### Add Has_Many to Cart and Product
+- ### Add Has_Many to Cart and Product Model ( cart.rb & product.rb )
 
     ``` ruby
     has_many :lineitems
     ```
 
 - ### Action when Delete Lineitem
-    - For Cart
+    - For Cart ( cart.rb )
 
         ``` ruby
         dependent: :destroy
         ```
 
-    - For Product
+    - For Product ( product.rb )
 
         ``` ruby
         before_destory :make_sure_no_line_items
@@ -250,7 +250,7 @@
         <%= button_to 'Add to Cart', lineitems_path(product_id: product), class: 'add_to_cart' %> 
         ```
 
-    - Create a current_cart.rb in concerns Folder
+    - Create a current_cart.rb in concerns Folder ( in controller / concerns )
 
         ``` ruby
         module CurrentCart  
@@ -273,7 +273,7 @@
         before_action :set_cart
         ```
 
-    - Modify the Create Action
+    - Modify the Create Action in LineItems Controller
 
         ``` ruby
         def create 
@@ -290,7 +290,7 @@
         rails g migration AddSomethingToLineitems quantity:integer
         ```
 
-    - Change Migration File
+    - Change Migration File ( in db / migrate )
 
         ``` ruby
         add_column :lineitems, :quantity, :integer, default: 1
@@ -303,7 +303,7 @@
         ```
 
 - ### Add Methods
-    - Cart
+    - Cart Model
         - Add Item
 
             ``` ruby
@@ -328,7 +328,7 @@
             end
             ```
 
-    - Lineietm
+    - Lineietm Model
         - Item Total Price
 
             ``` ruby
@@ -337,13 +337,13 @@
             end
             ```
 
-- ### Use Add Item Method
+- ### Use Add Item Method in Lineitem Controller
 
     ``` ruby
     @lineitem = @cart.add_item(product.id)
     ```
 
-- ### Add Empty_Cart Method
+- ### Add Empty_Cart Method in Cart Controller
     - Modify the Destroy Action
 
         ``` ruby
@@ -355,7 +355,7 @@
         ```
         
 - ### Move the Cart to Side Bar
-    - Change the Layout View
+    - Change the Layout View ( layout / application.html.erb )
 
         ``` html
         <div id="side">          
@@ -367,7 +367,7 @@
         </div>
         ```
 
-    - Create _cart.html.erb
+    - Create _cart.html.erb ( in views / carts )
 
         ``` html
         <h3>Shopping Cart</h3>
@@ -389,7 +389,7 @@
         <%= button_to "Empty Cart", @cart, method: :delete, data: {confirm: "Are you sure?"} %>
         ```
 
-    - Make Add to Cart and Empty Cart Redirect to Shopper_Url
+    - Make Add to Cart and Empty Cart Redirect to Shopper_Url ( in Controller )
 
         ``` ruby
         format.html { redirect_to shopper_url, ... }
@@ -430,7 +430,7 @@
         end
         ```
 
-    - Create create.js.erb in views/lineitems
+    - Create create.js.erb in views / lineitems
 
         ``` javascript
         document.getElementById('block').innerHTML = "";
@@ -476,7 +476,7 @@
     end
     ```
 
-- ### Add Check Out Button to Shopping Cart
+- ### Add Check Out Button to Shopping Cart ( in carts / _cart.html.erb )
 
     ``` html
     <%= button_to "Check Out", new_order_path, method: :get %>
@@ -604,7 +604,7 @@
     end
     ```
 
-- ### Order Table
+- ### User Table
 
     ```
     Username - String
@@ -617,7 +617,7 @@
     rails g scaffold User username password_digest
     ```
 
-- ### Change the Migration File
+- ### Change the Migration File ( in db / migrate )
 
     ``` ruby
     class CreateUsers < ActiveRecord::Migration[5.2]
@@ -656,7 +656,7 @@
         gem 'bcrypt', '~> 3.1.7'
         ```
 
-    - Install Gem
+    - Install Gem in Terminal
 
         ```
         bundle install
@@ -803,7 +803,7 @@
     rails g controller access new create destroy
     ```
 
-- ### Change the View for User Login ( new.html.erb )
+- ### Change the View for User Login ( access / new.html.erb )
 
     ``` html
     <div class="order_form">
@@ -869,7 +869,7 @@
     delete '/logout', to: "access#destroy", as: "logout"
     ```
 
-- ### Add Links and Buttons to Side Bar
+- ### Add Links and Buttons to Side Bar ( layout / application.html.erb )
 
     ``` html
     <div id="side">
@@ -910,13 +910,13 @@
     end
     ```
 
-- ### Add Shopper, Cart, Lineitem, Access to the White List
+- ### Add Shopper, Cart, Lineitem, Access to the White List in their Controller
 
     ``` ruby
     skip_before_action :authorize
     ```
 
-- ### Add New and Create Order to the White List
+- ### Add New and Create Order to the White List in its Controller
 
     ``` ruby
     skip_before_action :authorize, only: [:new, :create]
@@ -1601,7 +1601,7 @@
 
 - ### ( Optional & Dangerous ) Ignore the Upper-Case in PostgresSQL
 
-    - Change products.rb in Model ( However, it won't work in SQLite !!! )
+    - Change products.rb in Model ( Won't work in SQLite !!! You have to Change it back after Push ! )
     
         ``` ruby
         def self.search(name)
@@ -1612,4 +1612,3 @@
             end
         end
         ```
-        
